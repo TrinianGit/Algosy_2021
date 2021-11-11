@@ -7,11 +7,10 @@ int main(int argn, char* Argv[]){
     char litera;
     int liczba;
     int ilosc;
+    int found = 0;
     List Lista = List();
     
     cin >> ilosc;
-
-    
 
     while (ilosc != 0){
         cin >> litera;
@@ -40,13 +39,13 @@ int main(int argn, char* Argv[]){
                 break;
             case 'R':
                 int liczba2;
-                int found = 0;
                 cin >> liczba;
                 cin >> liczba2;
                 if ((found = Lista.find(liczba)) == -1) cout << "FALSE" << endl;
                 else {
                     Lista.erase(found);
                     Lista.insert(found, liczba2);
+                    cout << "TRUE" << endl;
                 }
                 break;
             case 'S':

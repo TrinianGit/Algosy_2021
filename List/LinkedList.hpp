@@ -23,7 +23,8 @@ class List{
             Node* new_node = new Node;
             new_node->value = x;
             new_node->next = guard->prev;
-            (guard->prev)->prev = new_node;
+            Node* gp = guard->prev;
+            gp->prev = new_node;
             guard->prev = new_node;
             if (Actual_size == 0) guard->next = guard->prev;
             Actual_size++;
@@ -33,19 +34,24 @@ class List{
             if (Actual_size == 0){
                 throw std::out_of_range("Empty");
             }
-            int x = (guard->prev)->value;
-            Node* ToDelete = guard->prev;
-            guard->prev = (guard->prev)->next;
+            Node* gp = guard->prev;
+            int x = gp->value;
+            guard->prev = gp->next;
             Actual_size--;
-            delete ToDelete;
+            if (Actual_size == 0) {
+                guard->prev = guard;
+                guard->next = guard;
+            }
+            delete gp;
             return x;
         }
 
         void push_back(int x){
             Node* new_node = new Node;
+            Node* gn = guard->next;
             new_node->value = x;
             new_node->prev = guard->next;
-            (guard->next)->next = new_node;
+            gn->next = new_node;
             guard->next = new_node;
             if (Actual_size == 0) guard->prev = guard->next;
             Actual_size++;
@@ -55,11 +61,15 @@ class List{
             if (Actual_size == 0){
                 throw std::out_of_range("Empty");
             }
-            int x = (guard->prev)->value;
-            Node* ToDelete = guard->next;
-            guard->next = (guard->next)->prev;
+            Node* gn = guard->next;
+            int x = gn->value;
+            guard->next = gn->prev;
             Actual_size--;
-            delete ToDelete;
+            if (Actual_size == 0) {
+                guard->prev = guard;
+                guard->next = guard;
+            }
+            delete gn;
             return x;
         }
 
@@ -90,32 +100,47 @@ class List{
         }
 
         int erase(int i){
+            if (i == Actual_size) return pop_back();
+            else if (i == 0) return pop_front();
             Node* search = guard->prev;
             int x;
             while (i != 0){
                 search = search->next;
                 i--;
             }
-            (search->prev)->next = search->next;
-            (search->next)->prev = search->prev;
+            Node* n = search->next;
+            Node* p = search->prev;
+            p->next = search->next;
+            n->prev = search->prev;
             x = search->value;
-            //delete search;
+            delete search;
             Actual_size--;
             return x;
         }
 
         void insert(int i, int x) {
-            Node* add = new Node;
-            Node* search = guard->prev;
-            add->value = x;
-            while (i != 0){
-                search = search->next;
-                i--;
-                std::cout << "here" << std::endl;
+            if (i == 0) {
+                push_front(x);
             }
-            (search->prev)->next = add;
-            search->prev = add;
-            Actual_size++;
+            else if (i == (Actual_size - 1) ){
+                push_back(x);
+            }
+            else{
+                Node* add = new Node;
+                Node* search = guard->prev;
+                add->value = x;
+                while (i != 0){
+                    search = search->next;
+                    i--;
+                }
+                Node* p = search->prev;
+                add->next = search;
+                add->prev = p;
+                p->next = add;
+                search->prev = add;
+                Actual_size++;
+            }
+
         }
 
         int remove(int x){

@@ -4,7 +4,7 @@ LDFLAGS	:=
 LDLIBS	:=
 
 .PHONY: all clean
-all: LinkedList.x
+all: LinkedList.x ArrayList.x
 
 %.x: %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
@@ -13,6 +13,8 @@ all: LinkedList.x
 
 LinkedList.x: LinkedList.o
 LinkedList.o: LinkedList.cpp LinkedList.hpp
+ArrayList.x: ArrayList.o
+ArrayList.o: ArrayList.cpp ArrayList.hpp
 #Generator.x: Generator.o
 #Generator.o: Generator.cpp
 #Radix.x: Radix.o

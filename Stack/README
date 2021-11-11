@@ -1,0 +1,79 @@
+========================================================================
+Autor: Jakub Siwy,                                    Krakow, 20.10.2021
+========================================================================
+
+* Zawartosc:
+============
+
+Katalog zawiera trzy programy w jezyku C++:
+--------------------------------------------------------------------
+
+I.  Program obslugujacy stos za pomoca standardowego wejscia korzystajac
+    z klasy Stack zdefiniowanej w jednym z plikow naglowkowych.
+    Program sklada sie z jednego modulu:
+    1) Stack.cpp ArratStack.hpp - program glowny wraz z definicja klasy
+                                  Stack
+
+II. Program generujacy losowo dane wejsciowe dla programu Stack.x.
+    Program sklada sie z jednego modulu:
+    1) Generator.cpp - program glowny
+
+III.Program zamieniajacy rownanie w zapisie infixowym na zapis w ONP przy
+    uzyciu stosu.
+    Program sklada sie z jednego modulu:
+    1) ONP.cpp LinkedStack.hpp - program glowny wraz z definicja klasy
+                                 Stack
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji i linkowania
+powyzszych programow, a takze czyszczenia katalogu.
+
+-> Przed uruchomieniem programow nalezy wykonac komende:
+        make
+
+-> Aby uruchomic 1-szy program, nalezy wykonac komende:
+        ./Stack.x
+
+-> Aby uruchomic 1-szy program generujac dane przy pomocy drugiego programu,
+   nalezy wykonac komende:
+        ./Generator.x | ./Stack.x
+
+-> Aby uruchomic 3-ci program, nalezy wykonac komende:
+        ./ONP.x
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+------------------------------------------------------------------------
+
+* Odpowiedzi na pytania:
+========================
+
+I.  Omow przyklady zastosowania stosu?
+        Stos jest stosowany przez procesory do zapamietywania rejestrow, do
+        przechowywania zmiennych lokalnych, a takze w programowaniu wysokopo-
+        ziomowym. Pomaga we wszystkich miejscach gdzie chcemy odwrocic kolej-
+        nosc w sekwencji danych, albo w algorytmach takich jak ONP.
+
+II. Dlaczego operacja pop() z std::stack nie zwraca wartosci elementu?
+        Operacja pop() z std::stack nie zwraca wartosci elementu gdyz jest
+        odpowiedzialna wylacznie za usuwanie ostatniego elementu ze stosu.
+        Funkcja odpowiedzialna za zwracanie wartosci elementu to top() z
+        std::stack (wyluskanie wartosci z referencji).
+
+III.Dlaczego operacja pop() z std::stack nie zwraca referencji do elementu?
+        Operacja pop() z std::stack nie zwraca wartosci elementu gdyz jest
+        odpowiedzialna wylacznie za usuwanie ostatniego elementu ze stosu.
+        Funkcja odpowiedzialna za zwracanie referencji do elementu to top()
+        z std::stack.
+
+IV. Do czego sluzy funkcja std::stack::emplace?
+        Funkcja std::stack::emplace sluzy do konstrukcji i nadania wartosci
+        nowemu elementowi w stosie. Nie zwraca zadnej wartosci.
+
+========================================================================
+

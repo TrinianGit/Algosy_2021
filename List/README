@@ -1,0 +1,76 @@
+========================================================================
+Autor: Jakub Siwy,                                    Krakow, 28.10.2021
+========================================================================
+
+* Zawartosc:
+============
+
+Katalog zawiera trzy programy w jezyku C++:
+------------------------------------------------------------------------
+
+I.  Program obslugujacy kolejke za pomoca standardowego wejscia korzystajac
+    z klasy Queue zdefiniowanej w jednym z plikow naglowkowych.
+    Program sklada sie z jednego modulu:
+    1) Queue.cpp LinkedQueue.hpp - program glowny wraz z definicja klasy
+                                   Queue
+
+II. Program generujacy losowo dane wejsciowe dla programu Queue.x.
+    Program sklada sie z jednego modulu:
+    1) Generator.cpp - program glowny
+
+III.Program sortujacy elementy wektora za pomoca sortowania pozycyjnego
+    przy uzyciu kolejek.
+    Program sklada sie z jednego modulu:
+    1) Radix.cpp ArrayQueue.hpp - program glowny wraz z definicja klasy
+                                  Queue
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji i linkowania
+powyzszych programow, a takze czyszczenia katalogu.
+
+-> Przed uruchomieniem programow nalezy wykonac komende:
+        make
+
+-> Aby uruchomic 1-szy program, nalezy wykonac komende:
+        ./Queue.x
+
+-> Aby uruchomic 1-szy program generujac dane przy pomocy drugiego programu,
+   nalezy wykonac komende:
+        ./Generator.x | ./Queue.x
+
+-> Aby uruchomic 3-ci program, nalezy wykonac komende:
+        ./Radix.x
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+------------------------------------------------------------------------
+
+* Odpowiedzi na pytania:
+========================
+
+I.  Opisz trzy sposoby obslugi cyklicznosci bufora.
+        Cyklicznosc bufora mozna obsluzyc za pomoca tablicy wraz z opera-
+        cja modulo przy probie przekroczenia zakresu tablicy. Mozna takze 
+        obsluzyc ja w postaci wskaznikow tablicy ktore beda odpowiednio 
+        modyfikowane. Da sie rowniez obsluzyc bufor cykliczny stosujac
+        postac listy jednokierunkowej cyklicznej.
+
+II. Omow przyklady zastosowania kolejki?
+        Kolejke uzywa sie w systemie przy obsludze zdarzen. Innym zasto-
+        sowaniem jest synchronizacja operacji (pierwsza ktora zglosila
+        chec wykonania zostanie wykonana). Jest rowniez przydatna w nie-
+        ktorych algorytmach np. sortowania pozycyjnego.
+
+III.Co oznaczają akronimy LIFO i FIFO?
+        LIFO - Last In First Out (pol. Ostatni na wejsciu pierwszy na 
+               wyjsciu)
+        FIFO - First In First Out (pol. Pierwszy na wejsciu pierwszy na
+               wyjsciu)
+        
+========================================================================
+

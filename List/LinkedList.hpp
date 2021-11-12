@@ -122,9 +122,6 @@ class List{
             if (i == 0) {
                 push_front(x);
             }
-            else if (i == (Actual_size - 1) ){
-                push_back(x);
-            }
             else{
                 Node* add = new Node;
                 Node* search = guard->prev;
@@ -144,16 +141,13 @@ class List{
         }
 
         int remove(int x){
-            Node* search = guard->prev;
             int count = 0;
-            while ( search != (guard->next) ){
-                if (search->value == x){
-                    (search->next)->prev = (search->prev);
-                    (search->prev)->next = (search->next);
-                    delete search;
-                    count++;
-                }
+            int found;
+            while ( (found = find(x) != -1) ){
+                erase(x);
+                count++;
             }
+            Actual_size-=count;
             return count;
         }
 

@@ -12,6 +12,7 @@ int main(int argn, char* Argv[]){
     
     cin >> ilosc;
 
+
     while (ilosc != 0){
         cin >> litera;
         switch (litera){

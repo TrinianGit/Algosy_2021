@@ -4,7 +4,7 @@ LDFLAGS	:=
 LDLIBS	:=
 
 .PHONY: all clean
-all: LinkedList.x ArrayList.x
+all: LinkedList.x ArrayList.x CursorList.x
 
 %.x: %.o
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
@@ -15,10 +15,10 @@ LinkedList.x: LinkedList.o
 LinkedList.o: LinkedList.cpp LinkedList.hpp
 ArrayList.x: ArrayList.o
 ArrayList.o: ArrayList.cpp ArrayList.hpp
+CursorList.x: CursorList.o
+CursorList.o: CursorList.cpp CursorList.hpp
 #Generator.x: Generator.o
 #Generator.o: Generator.cpp
-#Radix.x: Radix.o
-#Radix.o: Radix.cpp ArrayQueue.hpp
 
 clean:
 	$(RM) *.[ox]

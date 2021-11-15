@@ -72,6 +72,10 @@ class List{
             Array[help].next = spare;
             spare = help;
             Actual_size--;
+            if (Actual_size == 0){
+                head = spare;
+                tail = spare;
+            }
             return x;
         }
 
@@ -101,6 +105,10 @@ class List{
             Array[help].next = spare;
             spare = help;
             Actual_size--;
+            if (Actual_size == 0){
+                head = spare;
+                tail = spare;
+            }
             return x;
         }
 
@@ -123,19 +131,22 @@ class List{
             if (empty()) return -1;
             int position = 0;
             int i;
-            for (i = head; Array[i].value != x  && (position < Actual_size); position++, i = Array[head].next);
+            for (i = head; Array[i].value != x  && (position < Actual_size); position++, i = Array[i].next);
             if (Array[i].value == x) return position;
             return -1;
         }
 
         int erase(int i){
-            
+            if (i == 0){
+                return pop_front();
+            }
             int position = head;
             int save;
 
             while (i != 0){
                 if (i == 1) save = position;
                 position = Array[position].next;
+                i--;
             }
             Array[save].next = Array[position].next;
             Array[Array[position].next].prev = save;
@@ -147,26 +158,33 @@ class List{
         }
 
         void insert(int i, int x) {
-            int position = head;
-            int save;
-            int toSpare = Array[spare].next;
-            Array[spare].value = x;
-            while (i != 0){
-                if (i == 1) save = position;
-                position = Array[position].next;
+            if (i==0){
+                push_front(x);
             }
-            Array[spare].prev = save;
-            Array[save].next = spare;
-            Array[spare].next = position;
-            Array[position].prev = spare;
-            spare = toSpare;
+            else{
+                int position = head;
+                int save;
+                int toSpare = Array[spare].next;
+                Array[spare].value = x;
+                while (i != 0){
+                    if (i == 1) save = position;
+                    position = Array[position].next;
+                    i--;
+                }
+                Array[spare].prev = save;
+                Array[save].next = spare;
+                Array[spare].next = position;
+                Array[position].prev = spare;
+                spare = toSpare;
+                Actual_size++;
+            }
         }
 
         void show(){
             int position = 0;
             for (int i = head; position < Actual_size; position++){
                 std::cout << Array[i].value << " ";
-                i = Array[head].next; 
+                i = Array[i].next; 
             }
             std::cout << std::endl;
         }

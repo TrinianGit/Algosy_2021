@@ -12,12 +12,8 @@ int main(int argn, char* Argv[]){
     
     cin >> ilosc;
 
-    int i = 2;
-
     while (ilosc != 0){
         cin >> litera;
-        cout << i << ": " << flush;
-        i++;
         switch (litera){
             case 'F':
                 cin >> liczba;
@@ -45,13 +41,9 @@ int main(int argn, char* Argv[]){
                 int liczba2;
                 cin >> liczba;
                 cin >> liczba2;
-                cout << endl;
-                Lista.show();
                 if ((found = Lista.find(liczba)) == -1) cout << "FALSE" << endl;
                 else {
-                    Lista.show();
                     Lista.erase(found);
-                    Lista.show();
                     Lista.insert(found, liczba2);
                     cout << "TRUE" << endl;
                 }

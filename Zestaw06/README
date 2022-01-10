@@ -1,0 +1,80 @@
+========================================================================
+Autor: Jakub Siwy,                                    Krakow, 06.01.2022
+========================================================================
+
+* Zawartosc:
+============
+
+Katalog zawiera jeden program w jezyku C++:
+------------------------------------------------------------------------
+
+I.  Program oblugujacy drzewo binarne (BST).
+    Program sklada sie z jednego modulu:
+    1) BinaryTree.cpp BinaryTree.hpp - program glowny wraz z definicja
+                                       klasy drzewa BST
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji i linkowania
+powyzszych programow, a takze czyszczenia katalogu.
+
+-> Przed uruchomieniem programow nalezy wykonac komende:
+        make
+
+-> Aby uruchomic 1-szy program, nalezy wykonac komende:
+        ./BinaryTree.x
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+        make clean
+
+------------------------------------------------------------------------
+
+* Odpowiedzi na pytania:
+========================
+
+I.  Jakie operacje sa relatywnie szybko wykonywane na drzewie BST, poro-
+    wnaj zlozonosci czasowe z innymi strukturami danych.
+        Operacjami wykonywanymi relatywnie szybko w drzewie binarnym
+        jest jego przeszukiwanie ktore srednio wykonywane jest ze zlo-
+        zonoscia O(log(n)). W innych strukturach danych wyszukiwanie 
+        zwykle jest wykonywane ze zlozonoscia liniowa. Podobnie z ope-
+        racjami insert oraz delete, ktore w pozostalych strukturach
+        sa wykonywane ze zlozonoscia liniowa.
+
+II. Na czym polega iteracyjne przechodzenie drzewa bez uzycia rekuren-
+    cji?
+        Iteracyjne przechodzenie drzewa polega na przechodzeniu do coraz
+        glebszych node'ow a nastepnie cofaniu sie przy uzyciu wskaznikow
+        do rodzica.
+
+III.W jaki sposob mozna uzyc drzewo BST do sortowania elementow? Wskaz
+    podobienstwo do wczesniej poznanego algorytmu sortowania. Omow wady
+    takiego rozwiazania.
+        Drzewo binarne ze wzgledu na swoja strukture jest dosyc dobre
+        do sortowania elementow. Dzieki niemu wiemy ktore elementy sa
+        wieksze a ktore mniejsze od obecnie przegladanego i na tej pod-
+        stawie jestesmy w stanie posortowac elementy. Jest ono podobne
+        do insertion sorta ktory polegal na wstawianiu elementow w odpo-
+        wiednie miejsca. Wada drzewa binarnego jest liniowa zlozonosc
+        w przypadku posortowanych danych (wszystkie operacje maja zlozo-
+        nosc liniowa).
+
+IV. Na czym polega przechodzenie drzewa preorder?
+        Pre oreder polega na wypisywaniu wartosci w drzewie poczawszy od
+        rodzica a skonczywszy na prawym synu.
+
+V.  Na czym polega przechodzenie drzewa inorder? Jaka bedzie kolejnosc wypi-
+    sywanych elementow?
+        Inorder polega na wyswietlaniu najpierw wartosci lewego syna naste-
+        pnie rodzica a dopiero na samym koncu prawego syna. Kolejnosc wypi-
+        sywania ustawi elementy w porzadku rosnacym.
+
+VI. Na czym polega przechodzenie drzewa postorder?
+        Przechodzenie to polega na wypisywaniu wartosci poczawszy od prawego
+        syna przez lewego az do rodzica.
+
+        
+========================================================================

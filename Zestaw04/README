@@ -1,0 +1,66 @@
+========================================================================
+Autor: Jakub Siwy,                                    Krakow, 25.11.2021
+========================================================================
+
+* Zawartosc:
+============
+
+Katalog zawiera dwa programy w jezyku C++:
+------------------------------------------------------------------------
+
+I.  Program obslugujacy liste za pomoca standardowego wejscia korzystajac
+    z klasy List zdefiniowanej w ArrayList.hpp.
+    Program sklada sie z jednego modulu:
+    1) ArrayList.cpp ArrayList.hpp - program glowny wraz z definicja klasy
+                                   List
+
+II. Program obslugujacy liste za pomoca standardowego wejscia korzystajac
+    z klasy List zdefiniowanej w CursorList.hpp.
+    Program sklada sie z jednego modulu:
+    1) CursorList.cpp ArrayList.hpp - program glowny wraz z definicja klasy
+                                   List
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji i linkowania
+powyzszych programow, a takze czyszczenia katalogu.
+
+-> Przed uruchomieniem programow nalezy wykonac komende:
+        make
+
+-> Aby uruchomic 1-szy program, nalezy wykonac komende:
+        ./ArrayList.x
+
+-> Aby uruchomic 2-gi program, nalezy wykonac komende:
+        ./CursorList.x
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+       make clean
+
+------------------------------------------------------------------------
+
+* Odpowiedzi na pytania:
+========================
+
+I.  Jakie sa zalety implementacji wskaznikowej, a jakie implementacji tabli-
+    cowej?
+         Zalety implementacji tablicowej:
+        - Prosta nawigacja wewnatrz listy 
+        - gotowa struktura tablicy o konkretnym rozmiarze
+        - wieksza odpornosc na bledy
+        Zalety implementacji wskaznikowej:
+        - Wysoka elastycznosc listy
+        - w przypadku listy podwojnie wiazanej latwosc odwracania zawarto-
+        sci
+
+II. Jakie sa zalety implementacji kursorowej?
+        - mozliwosc przechowywania wielu list w jednym bloku pamieci
+        - wieksza odpornosc na bledy niz w implementacji wskaznikowej
+        - laczy cechy implementacji wskaznikowej i tablicowej
+
+
+        
+========================================================================

@@ -1,0 +1,92 @@
+========================================================================
+Autor: Jakub Siwy,                                    Krakow, 16.12.2021
+========================================================================
+
+* Zawartosc:
+============
+
+Katalog zawiera pięć programow w jezyku C++:
+------------------------------------------------------------------------
+
+I.  Program sortujacy dane za pomoca algorytmu sortowania babelkowego
+    Program sklada sie z jednego modulu:
+    1) BubbleSort.cpp - program glowny
+
+II. Program sortujacy dane za pomoca algorytmu sortowania przez wstawianie
+    Program sklada sie z jednego modulu:
+    1) InsertionSort.cpp - program glowny
+
+III.Program sortujacy dane za pomoca algorytmu sortowania przez wybor
+    Program sklada sie z jednego modulu:
+    1) SelectionSort.cpp - program glowny
+
+IV. Program sortujacy dane za pomoca algorytmu sortowania przez zliczanie
+    Program sklada sie z jednego modulu:
+    1) CountingSort.cpp - program glowny
+
+V.  Program sortujacy dane za pomoca algorytmu sortowania przez wybor ele-
+    mentow minimalnego i maksymalnego w liscie.
+    Program sklada sie z jednego modulu:
+    1) SelectionMinmax.cpp - program glowny
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji i linkowania
+powyzszych programow, a takze czyszczenia katalogu.
+
+-> Przed uruchomieniem programow nalezy wykonac komende:
+        make
+
+-> Aby uruchomic 1-szy program, nalezy wykonac komende:
+        ./BubbleSort.x
+
+-> Aby uruchomic 2-gi program, nalezy wykonac komende:
+        ./InsertionSort.x
+
+-> Aby uruchomic 3-ci program, nalezy wykonac komende:
+        ./SelectionSort.x
+
+-> Aby uruchomic 4-ty program, nalezy wykonac komende:
+        ./CountingSort.x
+
+-> Aby uruchomic 5-ty program, nalezy wykonac komende:
+        ./SelectionMinmax.x        
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+        make clean
+
+------------------------------------------------------------------------
+
+* Odpowiedzi na pytania:
+========================
+
+Zadanie 2
+
+        Sortowanie babelkowe - operacja dominujaca: porownanie dwoch komorek
+        tablicy/wektora
+        W sortowaniu babelkowym w kazdej iteracji wykonywana jest o jedna
+        mniej operacja dominujaca poczawszy od n-1 a skonczywszy na 1.
+        Zatem operacji dominujacych bedzie:
+                (n - 1) + (n - 2) + (n - 3) + ... + 1
+        Jest to ciąg arytmetyczny ktorego suma wynosi:
+                ((n - 1 + 1) / 2) * (n - 1) = (n * (n - 1)) / 2
+        Zlozonosc ta nie zalezy od typu danych, za kazdym razem wykona
+        tyle samo porownan. Mozna zatem obliczyc miare wrazliwosci pesy-
+        mistycznej ktora wynosi:
+                ((n * (n - 1)) / 2) - ((n * (n - 1)) / 2) = 0
+        Zatem algorytm nie jest wrazliwy na dane wejsciowe. Widac to na
+        przykladach, gdy algorytm dostanie 10000 danych posortowanych,
+        losowych i nieposortowanych (pesymistycznie - najmniesjszy ele-
+        ment jest na koncu). Ponizej przedstawiam wyniki:
+        Oczekiwana liczba operacji to 10000*9999/2 = 49995000
+        - Dane posortowane - liczba operacji: 49995000
+        - Dane losowe - liczba operacji: 49995000
+        - Dane pesymistyczne - liczba operacji: 49995000
+        Wyniki zgodne z oczekiwaniami.
+
+
+        
+========================================================================

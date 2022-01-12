@@ -45,12 +45,13 @@ public:
     QSlider *horizontalSlider_3;
     QLabel *label_5;
     QSlider *horizontalSlider_4;
+    QLabel *label_6;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
+    QPushButton *pushButton_5;
     QPushButton *pushButton_2;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton_3;
     QPushButton *pushButton;
+    QPushButton *pushButton_6;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -152,10 +153,18 @@ public:
 
         horizontalSlider_4 = new QSlider(verticalLayoutWidget);
         horizontalSlider_4->setObjectName(QString::fromUtf8("horizontalSlider_4"));
+        horizontalSlider_4->setEnabled(true);
         horizontalSlider_4->setCursor(QCursor(Qt::OpenHandCursor));
         horizontalSlider_4->setOrientation(Qt::Horizontal);
 
         verticalLayout->addWidget(horizontalSlider_4);
+
+        label_6 = new QLabel(verticalLayoutWidget);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setEnabled(true);
+        label_6->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(label_6);
 
         splitter->addWidget(verticalLayoutWidget);
         gridLayoutWidget = new QWidget(splitter);
@@ -163,25 +172,31 @@ public:
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
+        pushButton_5 = new QPushButton(gridLayoutWidget);
+        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+        pushButton_5->setEnabled(false);
+        pushButton_5->setCursor(QCursor(Qt::PointingHandCursor));
+
+        gridLayout->addWidget(pushButton_5, 2, 0, 1, 1);
+
         pushButton_2 = new QPushButton(gridLayoutWidget);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setCursor(QCursor(Qt::PointingHandCursor));
 
         gridLayout->addWidget(pushButton_2, 0, 1, 1, 1);
 
-        pushButton_4 = new QPushButton(gridLayoutWidget);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-
-        gridLayout->addWidget(pushButton_4, 2, 1, 1, 1);
-
-        pushButton_3 = new QPushButton(gridLayoutWidget);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-
-        gridLayout->addWidget(pushButton_3, 2, 0, 1, 1);
-
         pushButton = new QPushButton(gridLayoutWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setCursor(QCursor(Qt::PointingHandCursor));
 
         gridLayout->addWidget(pushButton, 0, 0, 1, 1);
+
+        pushButton_6 = new QPushButton(gridLayoutWidget);
+        pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
+        pushButton_6->setEnabled(false);
+        pushButton_6->setCursor(QCursor(Qt::PointingHandCursor));
+
+        gridLayout->addWidget(pushButton_6, 2, 1, 1, 1);
 
         splitter->addWidget(gridLayoutWidget);
         splitter_2->addWidget(splitter);
@@ -205,15 +220,16 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Algorytm Mrowkowy", nullptr));
-        label->setText(QApplication::translate("MainWindow", "Szybko\305\233\304\207 Animacji", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "Ilo\305\233\304\207 Mr\303\263wek", nullptr));
-        label_3->setText(QApplication::translate("MainWindow", "Wsp\305\202. Parowania Feromonu", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "Wp\305\202yw feromonu (alfa)", nullptr));
-        label_5->setText(QApplication::translate("MainWindow", "Wp\305\202yw d\305\202ugo\305\233ci (beta)", nullptr));
-        pushButton_2->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
-        pushButton_4->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
-        pushButton_3->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Szybko\305\233\304\207 animacji = 1", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Ilo\305\233\304\207 Mr\303\263wek = 10", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "Wsp\305\202. parowania feromonu = 0.01", nullptr));
+        label_4->setText(QApplication::translate("MainWindow", "Wp\305\202yw feromonu (alfa) = 1.03", nullptr));
+        label_5->setText(QApplication::translate("MainWindow", "Wp\305\202yw d\305\202. trasy (beta) = 0.01", nullptr));
+        label_6->setText(QString());
+        pushButton_5->setText(QApplication::translate("MainWindow", "Rozpocznij sym.", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Resetuj graf", nullptr));
+        pushButton->setText(QApplication::translate("MainWindow", "Dodaj graf", nullptr));
+        pushButton_6->setText(QApplication::translate("MainWindow", "Zatrzymaj sym.", nullptr));
     } // retranslateUi
 
 };

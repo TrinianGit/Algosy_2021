@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "algorithm.h"
 #include <iostream>
+#include <QFileDialog>
 
 using namespace std;
 
@@ -11,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     Algo = Algorithm();
     ui->setupUi(this);
+    scene = new QGraphicsScene(this);
+    ui->graphicsView->setScene(scene);
+
 }
 
 MainWindow::~MainWindow()
@@ -67,9 +71,7 @@ void MainWindow::on_pushButton_5_clicked()
         ui->horizontalSlider_4->setEnabled(false);
         ui->pushButton->setEnabled(false);
         ui->pushButton_2->setEnabled(false);
-        ui->pushButton_3->setEnabled(false);
-        ui->pushButton_4->setEnabled(false);
-        ui->pushButton_6->setEnabled(false);
+        ui->pushButton_6->setEnabled(true);
         ui->pushButton_5->setText("Zakończ sym.");
     }
     else{
@@ -78,11 +80,8 @@ void MainWindow::on_pushButton_5_clicked()
         ui->horizontalSlider_2->setEnabled(true);
         ui->horizontalSlider_3->setEnabled(true);
         ui->horizontalSlider_4->setEnabled(true);
-        ui->pushButton->setEnabled(true);
         ui->pushButton_2->setEnabled(true);
-        ui->pushButton_3->setEnabled(true);
-        ui->pushButton_4->setEnabled(true);
-        ui->pushButton_6->setEnabled(true);
+        ui->pushButton_6->setEnabled(false);
         ui->pushButton_5->setText("Rozpocznij sym.");
     }
     Algo.ChangeActive();
@@ -92,82 +91,29 @@ void MainWindow::on_pushButton_clicked()
 {
     if(!Algo.getGraph().get_changingP()){
         ui->label_6->setText("Jesteś w trybie dodawania punktów");
-        ui->pushButton_2->setEnabled(false);
-        ui->pushButton_3->setEnabled(false);
-        ui->pushButton_4->setEnabled(false);
+        ui->pushButton->setEnabled(false);
         ui->pushButton_5->setEnabled(false);
         ui->pushButton_6->setEnabled(false);
-    }
-    else{
+        ui->pushButton_2->setEnabled(false);
+        std::string file_name = QFileDialog::getOpenFileName(this, tr("Otworz Plik z Punktami"), QDir::currentPath(), "Plik tekstowy (*.txt);;Wszystkie pliki(*.*)").toStdString();
+        std::string file_name2 = QFileDialog::getOpenFileName(this, tr("Otworz Plik z Krawedziami"), QDir::currentPath(), "Plik tekstowy (*.txt);;Wszystkie pliki(*.*)").toStdString();
+        Algo.getGraph().points_to_graph(file_name, scene);
+        Algo.getGraph().connect_points(file_name2, scene);
         ui->label_6->setText("");
         ui->pushButton_2->setEnabled(true);
-        ui->pushButton_3->setEnabled(true);
-        ui->pushButton_4->setEnabled(true);
         ui->pushButton_5->setEnabled(true);
-        ui->pushButton_6->setEnabled(true);
     }
-    Algo.getGraph().change_changingP();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    if(!Algo.getGraph().get_changingP()){
-        ui->label_6->setText("Jesteś w trybie usuwania punktów");
-        ui->pushButton->setEnabled(false);
-        ui->pushButton_3->setEnabled(false);
-        ui->pushButton_4->setEnabled(false);
-        ui->pushButton_5->setEnabled(false);
-        ui->pushButton_6->setEnabled(false);
-    }
-    else{
-        ui->label_6->setText("");
-        ui->pushButton->setEnabled(true);
-        ui->pushButton_3->setEnabled(true);
-        ui->pushButton_4->setEnabled(true);
-        ui->pushButton_5->setEnabled(true);
-        ui->pushButton_6->setEnabled(true);
-    }
-    Algo.getGraph().change_changingP();
+    scene->clear();
+    ui->graphicsView->viewport()->update();
+    ui->pushButton->setEnabled(true);
+    ui->pushButton_5->setEnabled(false);
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_pushButton_6_clicked()
 {
-    if(!Algo.getGraph().get_changingK()){
-        ui->label_6->setText("Jesteś w trybie dodawania połączeń");
-        ui->pushButton->setEnabled(false);
-        ui->pushButton_2->setEnabled(false);
-        ui->pushButton_4->setEnabled(false);
-        ui->pushButton_5->setEnabled(false);
-        ui->pushButton_6->setEnabled(false);
-    }
-    else{
-        ui->label_6->setText("");
-        ui->pushButton->setEnabled(true);
-        ui->pushButton_2->setEnabled(true);
-        ui->pushButton_4->setEnabled(true);
-        ui->pushButton_5->setEnabled(true);
-        ui->pushButton_6->setEnabled(true);
-    }
-    Algo.getGraph().change_changingK();
-}
 
-void MainWindow::on_pushButton_4_clicked()
-{
-    if (!Algo.getGraph().get_changingK()){
-        ui->label_6->setText("Jesteś w trybie usuwania połączeń");
-        ui->pushButton->setEnabled(false);
-        ui->pushButton_2->setEnabled(false);
-        ui->pushButton_3->setEnabled(false);
-        ui->pushButton_5->setEnabled(false);
-        ui->pushButton_6->setEnabled(false);
-    }
-    else{
-        ui->label_6->setText("");
-        ui->pushButton->setEnabled(true);
-        ui->pushButton_2->setEnabled(true);
-        ui->pushButton_3->setEnabled(true);
-        ui->pushButton_5->setEnabled(true);
-        ui->pushButton_6->setEnabled(true);
-    }
-    Algo.getGraph().change_changingK();
 }

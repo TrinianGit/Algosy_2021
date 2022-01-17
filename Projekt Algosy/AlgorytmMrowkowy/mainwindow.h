@@ -45,7 +45,6 @@ private:
     QGraphicsScene *scene;
     QGraphicsEllipseItem *elipse;
     QGraphicsLineItem *line;
-    Algorithm Algo;
-    Graph g;
+    Algorithm* Algo;
 };
 #endif // MAINWINDOW_H

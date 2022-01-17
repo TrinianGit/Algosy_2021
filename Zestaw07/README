@@ -1,0 +1,34 @@
+========================================================================
+Autor: Jakub Siwy,                                    Krakow, 13.01.2022
+========================================================================
+
+* Zawartosc:
+============
+
+Katalog zawiera jeden program w jezyku C++:
+------------------------------------------------------------------------
+
+I.  Program oblugujacy slownik.
+    Program sklada sie z jednego modulu:
+    1) Dict.cpp Dict.hpp - program glowny wraz z definicja
+                            klasy słownika
+
+------------------------------------------------------------------------
+
+* Jak uruchomic programy:
+=========================
+
+Katalog zawiera program Makefile do kompilacji i linkowania
+powyzszych programow, a takze czyszczenia katalogu.
+
+-> Przed uruchomieniem programow nalezy wykonac komende:
+        make
+
+-> Aby uruchomic 1-szy program, nalezy wykonac komende:
+        ./Dict.x [nazwa_pliku_z_danymi]
+
+-> Aby wyczyscic zawartosc katalogu (usunac zbedne pliki), nalezy wykonac:
+        make clean
+
+------------------------------------------------------------------------
+========================================================================

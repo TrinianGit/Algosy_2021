@@ -17,16 +17,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     algorithm.cpp \
+    calculator.cpp \
+    dictionary.cpp \
     graph.cpp \
     main.cpp \
     mainwindow.cpp \
-    mrowka.cpp
+    mrowka.cpp \
+    paintthread.cpp
 
 HEADERS += \
     algorithm.h \
+    calculator.h \
+    dictionary.h \
     graph.h \
+    linkedlist.h \
     mainwindow.h \
-    mrowka.h
+    mrowka.h \
+    paintthread.h
 
 FORMS += \
     mainwindow.ui

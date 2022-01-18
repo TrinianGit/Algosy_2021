@@ -72,7 +72,6 @@ void MainWindow::on_pushButton_5_clicked()
         ui->horizontalSlider_4->setEnabled(false);
         ui->pushButton->setEnabled(false);
         ui->pushButton_2->setEnabled(false);
-        ui->pushButton_6->setEnabled(true);
 
         if (!Algo->getState()){
             Algo->ChangeActive();
@@ -80,21 +79,20 @@ void MainWindow::on_pushButton_5_clicked()
             if (Algo->GetActive()){
                 Algo->startAnt();
                 ui->pushButton_5->setText("Rozpocznij sym.");
-                Algo->ChangeActive();
+                ui->pushButton_5->setEnabled(true);
+                ui->SzybkoscAnimacji->setEnabled(true);
+                ui->horizontalSlider->setEnabled(true);
+                ui->horizontalSlider_2->setEnabled(true);
+                ui->horizontalSlider_3->setEnabled(true);
+                ui->horizontalSlider_4->setEnabled(true);
+                ui->pushButton_2->setEnabled(true);
             }
         }
     }
     else{
-        ui->SzybkoscAnimacji->setEnabled(true);
-        ui->horizontalSlider->setEnabled(true);
-        ui->horizontalSlider_2->setEnabled(true);
-        ui->horizontalSlider_3->setEnabled(true);
-        ui->horizontalSlider_4->setEnabled(true);
-        ui->pushButton_2->setEnabled(true);
-        ui->pushButton_6->setEnabled(false);
-        ui->pushButton_5->setText("Rozpocznij sym.");
         if(!Algo->getState()){
             Algo->pendFinish();
+            ui->pushButton_5->setEnabled(false);
         }
     }
 }
@@ -105,7 +103,6 @@ void MainWindow::on_pushButton_clicked()
         ui->label_6->setText("Jesteś w trybie dodawania punktów");
         ui->pushButton->setEnabled(false);
         ui->pushButton_5->setEnabled(false);
-        ui->pushButton_6->setEnabled(false);
         ui->pushButton_2->setEnabled(false);
         std::string file_name = QFileDialog::getOpenFileName(this, tr("Otworz Plik z Punktami"), QDir::currentPath(), "Plik tekstowy (*.txt);;Wszystkie pliki(*.*)").toStdString();
         std::string file_name2 = QFileDialog::getOpenFileName(this, tr("Otworz Plik z Krawedziami"), QDir::currentPath(), "Plik tekstowy (*.txt);;Wszystkie pliki(*.*)").toStdString();
@@ -125,7 +122,3 @@ void MainWindow::on_pushButton_2_clicked()
     ui->pushButton_5->setEnabled(false);
 }
 
-void MainWindow::on_pushButton_6_clicked()
-{
-
-}

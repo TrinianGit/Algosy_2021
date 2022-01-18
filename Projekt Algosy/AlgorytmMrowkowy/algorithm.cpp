@@ -58,6 +58,7 @@ void Algorithm::startAnt(){
 
     bool one_route = false;
     getGraph().resetPheromone();
+    getGraph().allBlack();
     while (!one_route && !finish){
         List<Mrowka*>* list_ants = new List<Mrowka*>();
         int toTimer = 20000 - (190 * speed);
@@ -95,9 +96,9 @@ void Algorithm::startAnt(){
         getGraph().updatePheromoneOn(ptr->value);
         one_route = CheckSame();
         getGraph().gratificateBest();
-        getGraph().allBlack();
-        getGraph().paintCurrBest();
-
+        if (one_route){
+            getGraph().paintCurrBest();
+        }
         while (!lista_list->empty()){
             List<int>* li = lista_list->pop_front();
             delete li;
@@ -109,6 +110,7 @@ void Algorithm::startAnt(){
         delete lista_list;
     }
     finish = false;
+    active = false;
 }
 
 bool Algorithm::CheckSame(){
@@ -138,4 +140,6 @@ Graph& Algorithm::getGraph(){
     return (*G);
 }
 
-
+Algorithm::~Algorithm(){
+    delete G;
+}

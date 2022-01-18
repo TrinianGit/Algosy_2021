@@ -141,7 +141,6 @@ void Mrowka::presentMeGoing(QTimeLine* timer){
 }
 
 Mrowka::~Mrowka(){
-    //std::cout << "Here" << std::endl;
     Scene->removeItem(ant);
     Scene->update();
     delete animation;

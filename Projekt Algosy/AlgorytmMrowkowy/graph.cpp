@@ -249,5 +249,8 @@ Graph::~Graph(){
     delete points;
     delete lines_with_distance;
     delete lines_pheromone;
+    delete connections;
+    delete line_color;
+    delete relation_list;
 }
 

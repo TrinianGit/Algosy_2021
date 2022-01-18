@@ -22,8 +22,7 @@ SOURCES += \
     graph.cpp \
     main.cpp \
     mainwindow.cpp \
-    mrowka.cpp \
-    paintthread.cpp
+    mrowka.cpp
 
 HEADERS += \
     algorithm.h \
@@ -32,8 +31,7 @@ HEADERS += \
     graph.h \
     linkedlist.h \
     mainwindow.h \
-    mrowka.h \
-    paintthread.h
+    mrowka.h
 
 FORMS += \
     mainwindow.ui

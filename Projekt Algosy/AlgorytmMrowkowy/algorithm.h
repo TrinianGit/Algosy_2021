@@ -4,7 +4,6 @@
 #include "graph.h"
 #include "mrowka.h"
 #include "calculator.h"
-#include "paintthread.h"
 #include <thread>
 #include <unistd.h>
 

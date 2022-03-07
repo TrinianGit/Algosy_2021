@@ -1,0 +1,7 @@
+set title "dictionarySimple removeElement"
+set xlabel "n"
+set ylabel "t"
+t(n) = b
+fit t(x) "dictionarySimpleDATA" using 1:2 via b 
+plot "dictionarySimpleDATA" using 1:2 , t(x) lw 2 
+pause -1 "Hit any key to continue."

@@ -1,5 +1,6 @@
 #include <iostream>
-#include "Sets.h"
+#include <chrono>
+#include "Sets.hpp"
 
 using namespace std;
 
@@ -7,7 +8,7 @@ int main(){
     srand(time(NULL));
     
     vector<string> strings;
-    int tab[1000];
+    double tab[1000];
 
     for (int i = 0; i < 1000; i++){
         tab[i] = 0;
@@ -24,7 +25,12 @@ int main(){
             strings.push_back(s);
         }
         for (int i = 0; i < 1000; i++){
-            tab[i] += s1->removeElement(strings.back());
+            auto start = std::chrono::system_clock::now();
+            s1->removeElement(strings.back());
+            auto end = std::chrono::system_clock::now();
+            auto elapsed = end - start;
+            
+            tab[i] += elapsed.count();
             strings.pop_back();
         }
         delete s1;

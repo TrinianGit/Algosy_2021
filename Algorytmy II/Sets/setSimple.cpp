@@ -1,14 +1,15 @@
 #include <iostream>
-#include "Sets.h"
+#include <chrono>
+#include "Sets.hpp"
 
 using namespace std;
 
 int main(){
 
     std::vector<int> vec;
-    int tab[1000];
+    double tab[500];
 
-    for (int i = 0; i < 1000; i++){
+    for (int i = 0; i < 500; i++){
         tab[i] = 0;
     }
 
@@ -16,16 +17,23 @@ int main(){
     for (int k = 0; k < 1000; k++){
         setSimple* s1 = new setSimple(vec, 1000);
         setSimple* s2 = new setSimple(vec, 1000);
-        for (int i = 0; i < 1000; i++){
+        for (int i = 0; i < 500; i++){
             s1->addElement(i);
             s2->addElement(999 - i);
-            tab[i] += s1->setUnion(*s2);
+            auto start = std::chrono::system_clock::now();
+            s1->setUnion(*s2);
+            auto end = std::chrono::system_clock::now();
+            auto elapsed = end - start;
+            
+            tab[i] += elapsed.count();
         }
+
         delete s1;
         delete s2;
     }
 
-    for (int i = 0; i < 1000; i++){
-        cout << i << " " << tab[i]/1000 << endl;
+    for (int i = 1; i < 501; i++){
+        cout << i*2 << " " << tab[i-1]/1000 << endl;
     }
+    
 }

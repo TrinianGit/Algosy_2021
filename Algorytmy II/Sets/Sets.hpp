@@ -1,9 +1,10 @@
-#ifndef SETS_H
-#define SETS_H
+#ifndef SETS_HPP
+#define SETS_HPP
 
 #include <vector>
 #include <list>
 #include <iostream>
+#include "LinkedList.hpp"
 
 class Set{
     public:
@@ -16,7 +17,7 @@ class Set{
         virtual bool checkExistance(int x){return false;};
 
         virtual void addElement(std::string x){};
-        virtual int removeElement(std::string x){return 0;};
+        virtual void removeElement(std::string x){};
         virtual bool checkExistance(std::string x){return false;};
 
 
@@ -49,8 +50,7 @@ class setSimple : Set{
             return setdata[x];
         }
 
-        //setSimple& setUnion(setSimple& s){
-        int setUnion(setSimple& s){
+        setSimple& setUnion(setSimple& s){
             std::vector<int> tmp;
             int counter = 0;
             for (int i = 0; i < setSize; i++){
@@ -60,8 +60,7 @@ class setSimple : Set{
                 }
             }
             setSimple* toReturn = new setSimple(tmp, setSize);
-            //return (*toReturn);
-            return counter;
+            return (*toReturn);
         }
 
         setSimple& setIntersection(setSimple& s){
@@ -77,7 +76,10 @@ class setSimple : Set{
         setSimple& setDifference(setSimple& s){
             std::vector<int> tmp;
             for (int i = 0; i < setSize; i++){
-                if (!s.checkExistance(i) && setdata[i]){
+                if (s.checkExistance(i) && setdata[i]){
+
+                }
+                else if ((!s.checkExistance(i) && setdata[i]) || (s.checkExistance(i) && !setdata[i])){
                     tmp.push_back(i);
                 }
             }
@@ -114,38 +116,39 @@ class setSimple : Set{
 
 
 class setLinked : Set{
+    
     public:
 
-        setLinked(std::list<int> defaultSet = std::list<int>()){
-            setdata = std::list<int>(defaultSet);
+        setLinked(List<int> defaultSet = List<int>()){
+            setdata = List<int>();
+            while (!defaultSet.empty()){
+                addElement(defaultSet.pop_back());
+            }
         }
 
         void addElement(int x) final{
-            std::list<int>::iterator it;
-            for (it = setdata.begin(); it != setdata.end(); it++){
+            for (List<int>::iterator it = setdata.begin(); it != setdata.end(); it++){
                 if (x < (*it)){
                     setdata.insert(it, x);
-                    break;
+                    return;
                 }
             }
-            if (it == setdata.end()){
-                setdata.push_back(x);
-            }
+            setdata.push_back(x);
         }
 
         void removeElement(int x) final{
-            std::list<int>::iterator it;
-            for (it = setdata.begin(); it != setdata.end(); it++){
+
+            for (List<int>::iterator it = setdata.begin(); it != setdata.end(); it++){
                 if (x == (*it)){
                     setdata.erase(it);
-                    break;
+                    return;
                 }
             }
         }
 
         bool checkExistance(int x) final{
-            std::list<int>::iterator it;
-            for (it = setdata.begin(); it != setdata.end(); it++){
+
+            for (List<int>::iterator it = setdata.begin(); it != setdata.end(); it++){
                 if (x == (*it)){
                     return true;
                 }
@@ -153,22 +156,21 @@ class setLinked : Set{
                     return false;
                 }
             }
-            return (*it) == x;
+            return false;
         }
 
-        //setLinked& setUnion(setLinked& s){
-        int setUnion(setLinked& s){
-            std::list<int> tmp;
-            std::list<int>::iterator it = setdata.begin();
-            std::list<int>::iterator it2 = s.setdata.begin();
+        setLinked& setUnion(setLinked& s){
+            List<int>* tmp = new List<int>();
+            List<int>::iterator it = setdata.begin();
+            List<int>::iterator it2 = s.setdata.begin();
             int counter = 0;
             if (setdata.back() > s.setdata.back()){
-                for (it; it != setdata.end(); it++){
-                    for (it2; it2 != s.setdata.end(); it2++){
+                for (; it != setdata.end(); it++){
+                    for (; it2 != s.setdata.end(); it2++){
                         counter++;
                         if ((*it2) < (*it)){
                             int c = (*it2);
-                            tmp.push_back(c);
+                            tmp->push_back(c);
                         }
                         else if ((*it2) == (*it)){
                             break;
@@ -178,16 +180,16 @@ class setLinked : Set{
                         }
                     }
                     int c = *it;
-                    tmp.push_back(c);
+                    tmp->push_back(c);
                 }
             }
             else{
-                for (it2; it2 != s.setdata.end(); it2++){
-                    for (it; it != setdata.end(); it++){
+                for (; it2 != s.setdata.end(); it2++){
+                    for (; it != setdata.end(); it++){
                         counter++;
                         if ((*it) < (*it2)){
                             int c = (*it);
-                            tmp.push_back(c);
+                            tmp->push_back(c);
                         }
                         else if ((*it) == (*it2)){
                             break;
@@ -197,24 +199,26 @@ class setLinked : Set{
                         }
                     }
                     int c = *it2;
-                    tmp.push_back(c);
+                    tmp->push_back(c);
                 }
             }
-            setLinked* toReturn = new setLinked(tmp);
-            //return (*toReturn);
-            return counter;
+            setLinked* toReturn = new setLinked(*tmp);
+            delete tmp;
+            return (*toReturn);
         }
 
         setLinked& setIntersection(setLinked& s){
-            std::list<int> tmp;
-            std::list<int>::iterator it = setdata.begin();
-            std::list<int>::iterator it2 = s.setdata.begin();
+            List<int>* tmp = new List<int>();
+
+            List<int>::iterator it = setdata.begin();
+            List<int>::iterator it2 = s.setdata.begin();
+
             if (setdata.back() > s.setdata.back()){
-                for (it; it != setdata.end(); it++){
-                    for (it2; it2 != s.setdata.end(); it2++){
+                for (; it != setdata.end(); it++){
+                    for (; it2 != s.setdata.end(); it2++){
                         if ((*it2) == (*it)){
                             int c = (*it2);
-                            tmp.push_back(c);
+                            tmp->push_back(c);
                             break;
                         }
                         else if ((*it2) > (*it)){
@@ -224,11 +228,11 @@ class setLinked : Set{
                 }
             }
             else{
-                for (it2; it2 != s.setdata.end(); it2++){
-                    for (it; it != setdata.end(); it++){
+                for (; it2 != s.setdata.end(); it2++){
+                    for (; it != setdata.end(); it++){
                         if ((*it) == (*it2)){
                             int c = (*it2);
-                            tmp.push_back(c);
+                            tmp->push_back(c);
                             break;
                         }
                         else if ((*it) > (*it2)){
@@ -237,20 +241,29 @@ class setLinked : Set{
                     }
                 }
             }
-            setLinked* toReturn = new setLinked(tmp);
+            setLinked* toReturn = new setLinked(*tmp);
+            delete tmp;
             return (*toReturn);
         }
         setLinked& setDifference(setLinked& s){
-            std::list<int> tmp;
-            std::list<int>::iterator it = setdata.begin();
-            std::list<int>::iterator it2 = s.setdata.begin();
+            List<int>* tmp2 = new List<int>();
 
-            for (it; it != setdata.end(); it++){
-                int c = (*it);
-                tmp.push_back(c);
-                for (it2; it2 != s.setdata.end(); it2++){
+            List<int>::iterator it = setdata.begin();
+            List<int>::iterator it2 = s.setdata.begin();
+            for (; it != setdata.end(); it++){
+                tmp2->push_back(*it);
+            }
+            for(; it2 != s.setdata.end(); it2++){
+                tmp2->push_back(*it2);
+            }
+
+            it = setdata.begin();
+            it2 = s.setdata.begin();
+
+            for (; it != setdata.end(); it++){
+                for (; it2 != s.setdata.end(); it2++){
                     if ((*it2) == (*it)){
-                        tmp.pop_back();
+                        tmp2->remove(*it, 2);
                         break;
                     }
                     else if ((*it2) > (*it)){
@@ -258,37 +271,36 @@ class setLinked : Set{
                     }
                 }
             }
-        
-            setLinked* toReturn = new setLinked(tmp);
+            setLinked* toReturn = new setLinked(*tmp2);
             return (*toReturn);
         }
 
         bool checkIdentity(setLinked& s){
-            std::list<int>::iterator it;
-            std::list<int>::iterator it2;
+            List<int>::iterator it2 = s.setdata.begin();
             if (setdata.size() != s.setdata.size()){
                 return false;
             }
-            for (it = setdata.begin(), it2 = s.setdata.begin(); it != setdata.end(); it++, it2++){
+            for (List<int>::iterator it = setdata.begin(); it != setdata.end(); it++, it2++){
                 if ((*it) != (*it2)){
                     return false;
                 }
             }
-            return (*it) == (*it2);
+            return true;
         }
 
-        friend std::ostream& operator<<(std::ostream& os, setLinked const& sl);
+        friend std::ostream& operator<<(std::ostream& os, setLinked& sl);
 
         ~setLinked(){
+
         }
 
     private:
-        std::list<int> setdata;
+        List<int> setdata;
 };
 
-    std::ostream& operator<<(std::ostream& os, setLinked const& sl){
-        for (auto& i : sl.setdata){
-            os << "[Element:" << i << "]" << " exists" << std::endl;
+    std::ostream& operator<<(std::ostream& os, setLinked& sl){
+        for (List<int>::iterator i = sl.setdata.begin(); i != sl.setdata.end(); i++){
+            os << "[Element:" << *i << "]" << " exists" << std::endl;
         }
         return os;
     }
@@ -312,6 +324,9 @@ class dictionarySimple : Set{
         void addElement(std::string x) final{
             int index = HashFunc(x);
             while (setdata[index] != ""){
+                if (setdata[index] == x){
+                    return;
+                }
                 index++;
                 if (index == setsize){
                     index = 0;
@@ -320,7 +335,7 @@ class dictionarySimple : Set{
             setdata[index] = x;
         }
 
-        int removeElement(std::string x) final{
+        void removeElement(std::string x) final{
             int index = HashFunc(x);
             int counter = 1;
             while (setdata[index] != x){
@@ -331,7 +346,6 @@ class dictionarySimple : Set{
                 }
             }
             setdata[index] = "";
-            return counter;
         }
 
         bool checkExistance(std::string x) final{
@@ -355,6 +369,8 @@ class dictionarySimple : Set{
             return false;
         }
 
+        friend std::ostream& operator<<(std::ostream& os, dictionarySimple const& s);
+
         ~dictionarySimple(){
             delete [] setdata;
         }
@@ -364,6 +380,14 @@ class dictionarySimple : Set{
         std::string* setdata;
         int setsize;
 };
+
+    std::ostream& operator<<(std::ostream& os, dictionarySimple const& sl){
+        for (int i = 0; i < sl.setsize; i++){
+            os << sl.setdata[i] << ((sl.setdata[i] != "") ? " " : "");
+        }
+        os << std::endl;
+        return os;
+    }
 
 
 #endif

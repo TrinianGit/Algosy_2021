@@ -1,6 +1,7 @@
 set title "setSimple setUnion"
 set xlabel "n"
 set ylabel "t"
+set autoscale y
 t(n) = b
 fit t(x) "setSimpleDATA" using 1:2 via b 
 plot "setSimpleDATA" using 1:2 , t(x) lw 2 

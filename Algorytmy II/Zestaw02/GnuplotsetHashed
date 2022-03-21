@@ -1,0 +1,7 @@
+set title "setHashed setIntersection"
+set xlabel "n"
+set ylabel "t"
+t(n) = a * n * n + b * n + c
+fit t(x) "setHashedDATA" using 1:2 via a, b, c
+plot "setHashedDATA" using 1:2 , t(x) lw 2 
+pause -1 "Hit any key to continue."

@@ -1,0 +1,7 @@
+set title "setSimple setIntersection"
+set xlabel "n"
+set ylabel "t"
+t(n) = b
+fit t(x) "setSimpleDATA" using 1:2 via b 
+plot "setSimpleDATA" using 1:2 , t(x) lw 2 
+pause -1 "Hit any key to continue."
